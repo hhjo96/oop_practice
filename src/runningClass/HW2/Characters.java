@@ -52,9 +52,9 @@ public abstract class Characters {
         }
     };
 
-    void attackDamage(Characters characters, int damage) {
+    void attackDamage(Characters ch, int damage) {
         System.out.println(this.name+ "가(이) 공격합니다.");
-        getDamage(characters, damage);
+        getDamage(ch, damage);
     }
 
     final void resurrect() {
