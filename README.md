@@ -32,11 +32,16 @@ classDiagram
     }
     class Ranged {
         <<interface>>
-        ~kite() Characters
+        ~kite(target: Characters) 
     }
     class Melee {
         <<interface>>
-        ~punch() Characters
+        ~punch(target: Characters) 
+    }
+    class Resurrectable {
+        <<interface>>
+        ~canResurrect(): boolean;
+        ~afterResurrect(): void;
     }
     class Characters {
         ~name: String
