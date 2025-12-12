@@ -10,7 +10,7 @@ public class Walter extends Characters implements Ranged {
 
 
 
-    void ult(Characters target) {
+    public void ult(Characters target) {
         System.out.println(this.name + "의 궁");
         getDamage(target, STRONG_ULT_ATTACK);
     }
@@ -24,5 +24,6 @@ public class Walter extends Characters implements Ranged {
     public void ownSkill() {
         System.out.println(this.name + "는 전용 탈것 워비를 타고 빠르게 이동합니다.");
     }
+
 
 }

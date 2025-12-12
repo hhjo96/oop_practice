@@ -39,36 +39,55 @@ classDiagram
         ~punch() Characters
     }
     class Characters {
-        ~String name, int health, int hunger, int sanity, int damage, int inventory, String foodType
-        ~Static int battleCount, static int characterCount
-        +Characters() 
+        ~name: String
+        ~health: int
+        ~hunger: int
+        ~sanity: int
+        ~damage: int
+        ~inventory: int
+        ~foodType: String
+        ~static battleCount: int
+        ~static characterCount: int
+        +Characters(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType, int battleCount)
         
-        ~abstract void ult() Characters
-        ~abstract void ownSkill() Characters
-        ~void fillHealth() int
-        ~void fillHunger() int
-        ~void fillSanity() int
-        ~void getDamage() Characters, int
-        ~void attachDamage() Characters, int
-        ~final void resurrect() void
+        ~abstract ult(ch: Characters): void
+        ~abstract ownSkill() : void
+        ~fillHealth(health: int) : void
+        ~fillHunger(hunger: int) : void
+        ~fillSanity(sanity: int) : void
+        ~getDamage(ch: Characters, damage: int) : void
+        ~attachDamage(ch: Characters, damage: int) : void
+        ~final resurrect() void
     }
-    class Walter extends Characters implements Ranged{
-        ~Walter() Characters
+    class Walter {
+        +Walter(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        +ult(target: Characters): void
+        +ownSkill(): void
+        +kite(target: Characters): void
     }
-    class Wilson extends Characters {
-        ~Wilson() Characters
+    class Wilson {
+        ~Wilson(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        +ult(target: Characters): void
+        +ownSkill(): void
+        +punch(target: Characters): void
     }
-    class Wigfrid extends Characters {
-        ~Wigfrid() Characters
+    class Wigfrid  {
+        ~Wigfrid(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        +ult(target: Characters): void
+        +ownSkill(): void
+        +punch(target: Characters): void
     }
-    class Wurt extends Characters {
-        ~Wurt() Characters
+    class Wurt {
+        ~Wurt(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        +ult(target: Characters): void
+        +ownSkill(): void
+        +punch(target: Characters): void
     }
 
-Character <|-- Walter
-Character <|-- Wigfrid
-Character <|-- Wilson
-Character <|-- Wurt
+Characters <|-- Walter
+Characters <|-- Wigfrid
+Characters <|-- Wilson
+Characters <|-- Wurt
 
 Melee <|.. Wigfrid
 Melee <|.. Wilson
