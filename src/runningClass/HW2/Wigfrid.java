@@ -11,7 +11,7 @@ public class Wigfrid extends Characters implements Melee{
     }
 
 
-    void ult(Characters target) {
+    public void ult(Characters target) {
         System.out.println(this.name + "의 궁");
         getDamage(target, STRONG_ULT_ATTACK);
     }
