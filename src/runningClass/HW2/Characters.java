@@ -57,4 +57,9 @@ public abstract class Characters {
         getDamage(characters, damage);
     }
 
+    final void resurrect() {
+        System.out.println(this.name + "가 부활합니다.");
+        this.fillHealth(1);
+    }
+
 }
