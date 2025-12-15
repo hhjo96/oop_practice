@@ -4,8 +4,8 @@ import static runningClass.HW2.GameConstants.*;
 
 //월터: 전용 탈것이 있음, 맞은만큼 정신력도 깎임
 public class Walter extends Characters implements Ranged {
-    public Walter(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType) {
-        super(name, health, hunger, sanity, damage, inventory, foodType);
+    public Walter(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType, Resurrectable resurrectable) {
+        super(name, health, hunger, sanity, damage, inventory, foodType, resurrectable);
     }
 
 

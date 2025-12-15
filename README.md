@@ -40,8 +40,15 @@ classDiagram
     }
     class Resurrectable {
         <<interface>>
-        ~canResurrect(): boolean;
-        ~afterResurrect(): void;
+        +canResurrect(): boolean
+        +afterResurrect(): void
+    }
+    class CoolTimeResurrect{
+        -nextResurrectTime: long
+        -final cooltime: long
+        +Resurrectable(cooltime: long)
+        +canResurrect(): boolean
+        +afterResurrect(): void
     }
     class Characters {
         ~name: String
