@@ -19,8 +19,9 @@ public abstract class Characters {
 
     boolean dead = false;
     final Resurrectable resurrectable;
+    CharacterType type;
 
-    public Characters(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType, Resurrectable resurrectable) {
+    public Characters(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType, Resurrectable resurrectable, CharacterType type) {
         this.name = name;
         this.health = health;
         this.hunger = hunger;
@@ -30,7 +31,10 @@ public abstract class Characters {
         this.foodType = foodType;
         characterCount++;
         this.resurrectable = resurrectable;
+        this.type = type;
     }
+
+
 
     abstract void ult(Characters ch);
 
@@ -85,6 +89,13 @@ public abstract class Characters {
             } else {
                 Logg.add(this.name + " 부활 쿨타임");
             }
+        }
+    }
+
+    public void punchOrKite(Characters ch) {
+        switch(this.type) {
+            case MELEE -> ((Melee)this).punch(ch);
+            case RANGED -> ((Ranged)this).kite(ch);
         }
     }
 

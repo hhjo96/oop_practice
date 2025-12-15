@@ -15,13 +15,13 @@ public class Main {
 
 
         Characters wilson
-                = new Wilson("윌슨", BASIC, BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY,  "normal", shortRes);
+                = new Wilson("윌슨", BASIC, BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY,  "normal", shortRes, CharacterType.MELEE);
         Characters wigfrid
-                = new Wigfrid("위그", HUGE_BASIC, SMALL_BASIC, TINY_BASIC, STRONG_ATTACK, BASIC_INVENTORY, "meatatarian", longRes);
+                = new Wigfrid("위그", HUGE_BASIC, SMALL_BASIC, TINY_BASIC, STRONG_ATTACK, BASIC_INVENTORY, "meatatarian", longRes, CharacterType.MELEE);
         Characters walter
-                = new Walter("월터", SMALL_BASIC, BIG_BASIC, HUGE_BASIC, BASIC_ATTACK, BASIC_INVENTORY, "normal", shortRes);
+                = new Walter("월터", SMALL_BASIC, BIG_BASIC, HUGE_BASIC, BASIC_ATTACK, BASIC_INVENTORY, "normal", shortRes, CharacterType.RANGED);
         Characters wurt
-                = new Wurt("워트", BASIC, HUGE_BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY, "vegetarian", longRes);
+                = new Wurt("워트", BASIC, HUGE_BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY, "vegetarian", longRes, CharacterType.MELEE);
 
         Random random = new Random();
 
@@ -46,18 +46,20 @@ public class Main {
             characters[rand1].fillHealth(random.nextInt(100));
             characters[rand2].fillHealth(random.nextInt(100));
 
-            if(characters[rand1] instanceof Melee) {
-                ((Melee) characters[rand1]).punch(characters[rand2]);
-            }
-            if(characters[rand2] instanceof Melee) {
-                ((Melee) characters[rand2]).punch(characters[rand1]);
-            }
-            if (characters[rand1] instanceof Ranged) {
-                ((Ranged) characters[rand1]).kite(characters[rand2]);
-            }
-            if (characters[rand2] instanceof Ranged) {
-                ((Ranged) characters[rand2]).kite(characters[rand1]);
-            }
+//            if(characters[rand1] instanceof Melee) {
+//                ((Melee) characters[rand1]).punch(characters[rand2]);
+//            }
+//            if(characters[rand2] instanceof Melee) {
+//                ((Melee) characters[rand2]).punch(characters[rand1]);
+//            }
+//            if (characters[rand1] instanceof Ranged) {
+//                ((Ranged) characters[rand1]).kite(characters[rand2]);
+//            }
+//            if (characters[rand2] instanceof Ranged) {
+//                ((Ranged) characters[rand2]).kite(characters[rand1]);
+//            }
+            characters[rand1].punchOrKite(characters[rand2]);
+            characters[rand2].punchOrKite(characters[rand1]);
 
             characters[rand1].ult(characters[rand2]);
             characters[rand2].ult(characters[rand1]);
