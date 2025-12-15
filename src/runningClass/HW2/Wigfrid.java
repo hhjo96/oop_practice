@@ -12,17 +12,17 @@ public class Wigfrid extends Characters implements Melee{
 
 
     public void ult(Characters target) {
-        System.out.println(this.name + "의 궁");
+        Logg.add(this.name + "의 궁");
         getDamage(target, STRONG_ULT_ATTACK);
     }
 
     public void punch(Characters target) {
-        System.out.println(this.name + "의 근접 공격");
+        Logg.add(this.name + "의 근접 공격");
         getDamage(target, STRONG_PUNCH);
     }
 
     public void ownSkill(){
-        System.out.println(this.name + "가(이) 고기를 먹고 체력을 60 회복합니다.");
+        Logg.add(this.name + "가(이) 고기를 먹고 체력을 60 회복합니다.");
         this.health += 60;
     }
 

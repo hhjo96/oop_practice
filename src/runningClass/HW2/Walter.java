@@ -11,18 +11,18 @@ public class Walter extends Characters implements Ranged {
 
 
     public void ult(Characters target) {
-        System.out.println(this.name + "의 궁");
+        Logg.add(this.name + "의 궁");
         getDamage(target, STRONG_ULT_ATTACK);
     }
 
     @Override
     public void kite(Characters target) {
-        System.out.println(this.name + "의 원거리 공격");
+        Logg.add(this.name + "의 원거리 공격");
         getDamage(target, BASIC_KITE);
     }
 
     public void ownSkill() {
-        System.out.println(this.name + "는 전용 탈것 워비를 타고 빠르게 이동합니다.");
+        Logg.add(this.name + "는 전용 탈것 워비를 타고 빠르게 이동합니다.");
     }
 
 
