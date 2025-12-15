@@ -26,6 +26,6 @@ public class Wurt extends Characters implements Melee {
         this.sanity += 50;
         this.hunger += 50;
     }
-    void resurrectAfterEffects() {
+    public void resurrectAfterEffects() {
     }
 }

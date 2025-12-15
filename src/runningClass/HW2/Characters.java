@@ -95,22 +95,22 @@ public abstract class Characters {
 
     abstract void resurrectAfterEffects();
 
-    public void punchOrKite(Characters ch) {
+    void punchOrKite(Characters ch) {
         switch(this.type) {
             case MELEE -> ((Melee)this).punch(ch);
             case RANGED -> ((Ranged)this).kite(ch);
         }
     }
 
-    public static class Logg {
+    static class Logg {
         private static final List<String> log = new ArrayList<>();
 
         private Logg() {}
 
-        public static void add(String msg) {
+        static void add(String msg) {
             log.add(msg);
         }
-        public static void printAll() {
+        static void printAll() {
             for (String msg : log) {
                 System.out.println(msg);
             }
