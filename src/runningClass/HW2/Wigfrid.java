@@ -6,8 +6,8 @@ import static runningClass.HW2.GameConstants.STRONG_ULT_ATTACK;
 //위그: 공격력 2배, 고기만 먹음
 public class Wigfrid extends Characters implements Melee{
 
-    public Wigfrid(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType) {
-        super(name, health, hunger, sanity, damage, inventory, foodType);
+    public Wigfrid(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType, Resurrectable resurrectable) {
+        super(name, health, hunger, sanity, damage, inventory, foodType, resurrectable);
     }
 
 

@@ -5,8 +5,8 @@ import static runningClass.HW2.GameConstants.BASIC_ULT_ATTACK;
 
 //워트: 스탯을 올릴 수 있음, 야채만 먹음
 public class Wurt extends Characters implements Melee {
-    public Wurt(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType) {
-        super(name, health, hunger, sanity, damage, inventory, foodType);
+    public Wurt(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType, Resurrectable resurrectable) {
+        super(name, health, hunger, sanity, damage, inventory, foodType, resurrectable);
     }
 
 

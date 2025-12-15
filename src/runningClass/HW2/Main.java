@@ -10,14 +10,18 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Resurrectable shortRes = new CoolTimeResurrect(10);
+        Resurrectable longRes = new CoolTimeResurrect(100);
+
+
         Characters wilson
-                = new Wilson("윌슨", BASIC, BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY,  "normal");
+                = new Wilson("윌슨", BASIC, BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY,  "normal", shortRes);
         Characters wigfrid
-                = new Wigfrid("위그", HUGE_BASIC, SMALL_BASIC, TINY_BASIC, STRONG_ATTACK, BASIC_INVENTORY, "meatatarian");
+                = new Wigfrid("위그", HUGE_BASIC, SMALL_BASIC, TINY_BASIC, STRONG_ATTACK, BASIC_INVENTORY, "meatatarian", longRes);
         Characters walter
-                = new Walter("월터", SMALL_BASIC, BIG_BASIC, HUGE_BASIC, BASIC_ATTACK, BASIC_INVENTORY, "normal");
+                = new Walter("월터", SMALL_BASIC, BIG_BASIC, HUGE_BASIC, BASIC_ATTACK, BASIC_INVENTORY, "normal", shortRes);
         Characters wurt
-                = new Wurt("워트", BASIC, HUGE_BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY, "vegetarian");
+                = new Wurt("워트", BASIC, HUGE_BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY, "vegetarian", longRes);
 
         Random random = new Random();
 
@@ -57,20 +61,25 @@ public class Main {
 
             characters[rand1].ult(characters[rand2]);
             characters[rand2].ult(characters[rand1]);
+
+            if(characters[rand1].health <= 0) {
+                characters[rand1].dead = true;
+                characters[rand1].resurrect();
+            }
+            if(characters[rand2].health <= 0) {
+                characters[rand2].dead = true;
+                characters[rand2].resurrect();
+            }
         }
 
         System.out.println("======일대일 종료!======");
         if(characters[rand1].health > characters[rand2].health) {
             System.out.println(characters[rand1].name + " 승!"+ characters[rand2].name + " 패!");
-            characters[rand2].resurrect();
         } else if(characters[rand1].health < characters[rand2].health) {
             System.out.println(characters[rand2].name + " 승!"+ characters[rand1].name + " 패!");
-            characters[rand2].resurrect();
         } else {
             System.out.println(characters[rand1].name+"와(과) "+ characters[rand2].name + "은(는) 비겼다!");
             if(characters[rand1].health == 0 && characters[rand2].health == 0) {
-                characters[rand1].resurrect();
-                characters[rand2].resurrect();
             }
         }
 
