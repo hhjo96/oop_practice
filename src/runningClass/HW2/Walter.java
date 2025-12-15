@@ -25,5 +25,10 @@ public class Walter extends Characters implements Ranged {
         Logg.add(this.name + "는 전용 탈것 워비를 타고 빠르게 이동합니다.");
     }
 
+    @Override
+    void resurrectAfterEffects() {
+        this.fillHealth(100);
+    }
+
 
 }

@@ -25,4 +25,7 @@ public class Wilson extends Characters implements Melee{
         Logg.add(this.name + "이 수염을 3칸짜리 인벤토리로 씁니다.");
         this.inventory += 3;
     }
+    void resurrectAfterEffects() {
+        this.fillHealth(100);
+    }
 }
