@@ -26,7 +26,7 @@ public class Walter extends Characters implements Ranged {
     }
 
     @Override
-    void resurrectAfterEffects() {
+    public void resurrectAfterEffects() {
         this.fillHealth(100);
     }
 

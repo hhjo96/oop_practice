@@ -45,8 +45,8 @@ classDiagram
     }
     class Resurrectable {
         <<interface>>
-        +canResurrect(): boolean
-        +afterResurrect(): void
+        ~canResurrect(): boolean
+        ~afterResurrect(): void
     }
     class CoolTimeResurrect{
         -nextResurrectTime: long
@@ -76,35 +76,40 @@ classDiagram
         ~attachDamage(ch: Characters, damage: int) : void
         ~final resurrect() void
         ~punchOrKite(ch: Characters) : void
+        ~abstract resurrectAfterEffects(): void
     }
     class Logger {
         <<static>>
-        +add(msg: String): void
-        +printAll(): void
+        ~add(msg: String): void
+        ~printAll(): void
     }
     class Walter {
         +Walter(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
         +ult(target: Characters): void
         +ownSkill(): void
         +kite(target: Characters): void
+        +resurrectAfterEffects(): void
     }
     class Wilson {
         ~Wilson(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
         +ult(target: Characters): void
         +ownSkill(): void
         +punch(target: Characters): void
+        +resurrectAfterEffects(): void
     }
     class Wigfrid  {
         ~Wigfrid(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
         +ult(target: Characters): void
         +ownSkill(): void
         +punch(target: Characters): void
+        +resurrectAfterEffects(): void
     }
     class Wurt {
         ~Wurt(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
         +ult(target: Characters): void
         +ownSkill(): void
         +punch(target: Characters): void
+        +resurrectAfterEffects(): void
     }
 
 Characters <|-- Walter
