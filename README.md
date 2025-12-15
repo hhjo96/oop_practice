@@ -5,9 +5,14 @@
 
 메인함수 Main.java
 각 캐릭터 공통 Characters.java
+근딜 원딜 종류 CharacterType
+부활 관련 Resurrectable.java, CoolTimeResurrect.java
 캐릭터 walter, wigfrid, wilson, walter
+게임 관련 상수 GameConstants.java
 
 랜덤한 두 캐릭터가 싸우다가 한쪽이 죽으면 승패 출력
+
+기본~선택까지.(선택3 static 남용문제 제외)
 
 ```mermaid
 classDiagram
@@ -70,6 +75,12 @@ classDiagram
         ~getDamage(ch: Characters, damage: int) : void
         ~attachDamage(ch: Characters, damage: int) : void
         ~final resurrect() void
+        ~punchOrKite(ch: Characters) : void
+    }
+    class Logger {
+        <<static>>
+        +add(msg: String): void
+        +printAll(): void
     }
     class Walter {
         +Walter(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
@@ -105,5 +116,6 @@ Melee <|.. Wigfrid
 Melee <|.. Wilson
 Melee <|.. Wurt
 Ranged <|.. Walter
+Characters *-- Logger
 
 ```
