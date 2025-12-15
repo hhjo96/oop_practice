@@ -34,7 +34,7 @@ public class Main {
             rand2 = random.nextInt(characters.length);
         }
 
-        System.out.println("======일대일 시작!======");
+        Characters.Logg.add("======일대일 시작!======");
 
         while(characters[rand1].health > 0 && characters[rand2].health > 0) {
             characters[rand1].attackDamage(characters[rand2], random.nextInt(30));
@@ -72,17 +72,16 @@ public class Main {
             }
         }
 
-        System.out.println("======일대일 종료!======");
+        Characters.Logg.add("======일대일 종료!======");
         if(characters[rand1].health > characters[rand2].health) {
-            System.out.println(characters[rand1].name + " 승!"+ characters[rand2].name + " 패!");
+            Characters.Logg.add(characters[rand1].name + " 승!"+ characters[rand2].name + " 패!");
         } else if(characters[rand1].health < characters[rand2].health) {
-            System.out.println(characters[rand2].name + " 승!"+ characters[rand1].name + " 패!");
+            Characters.Logg.add(characters[rand2].name + " 승!"+ characters[rand1].name + " 패!");
         } else {
-            System.out.println(characters[rand1].name+"와(과) "+ characters[rand2].name + "은(는) 비겼다!");
-            if(characters[rand1].health == 0 && characters[rand2].health == 0) {
-            }
+            Characters.Logg.add(characters[rand1].name+"와(과) "+ characters[rand2].name + "은(는) 비겼다!");
         }
 
+        Characters.Logg.printAll();
         System.out.println("캐릭터 생성 횟수: "+ Characters.characterCount + " 전투 횟수: " + Characters.battleCount);
     }
 }

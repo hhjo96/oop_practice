@@ -11,17 +11,17 @@ public class Wurt extends Characters implements Melee {
 
 
     public void ult(Characters target) {
-        System.out.println(this.name + "의 궁");
+        Logg.add(this.name + "의 궁");
         getDamage(target, BASIC_ULT_ATTACK);
     }
 
     public void punch(Characters target) {
-        System.out.println(this.name + "의 근접 공격");
+        Logg.add(this.name + "의 근접 공격");
         getDamage(target, BASIC_PUNCH);
     }
 
     public void ownSkill() {
-        System.out.println(this.name + "가 야채를 먹고 스탯을 향상시킵니다.");
+        Logg.add(this.name + "가 야채를 먹고 스탯을 향상시킵니다.");
         this.health += 100;
         this.sanity += 50;
         this.hunger += 50;

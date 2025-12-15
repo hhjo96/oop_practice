@@ -12,17 +12,17 @@ public class Wilson extends Characters implements Melee{
 
 
     public void ult(Characters target) {
-        System.out.println(this.name + "의 궁");
+        Logg.add(this.name + "의 궁");
         getDamage(target, BASIC_ULT_ATTACK);
     }
 
     public void punch(Characters target) {
-        System.out.println(this.name + "의 근접 공격");
+        Logg.add(this.name + "의 근접 공격");
         getDamage(target, BASIC_PUNCH);
     }
 
     public void ownSkill(){
-        System.out.println(this.name + "이 수염을 3칸짜리 인벤토리로 씁니다.");
+        Logg.add(this.name + "이 수염을 3칸짜리 인벤토리로 씁니다.");
         this.inventory += 3;
     }
 }

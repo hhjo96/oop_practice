@@ -1,5 +1,8 @@
 package runningClass.HW2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static runningClass.HW2.GameConstants.*;
 
 public abstract class Characters {
@@ -34,21 +37,21 @@ public abstract class Characters {
     abstract void ownSkill();
 
     void fillHealth(int health) {
-        System.out.println(this.name + "가(이) 체력을 " + health + " 회복합니다.");
+        Logg.add(this.name + "가(이) 체력을 " + health + " 회복합니다.");
         this.health += health;
     }
 
     ;
 
     void fillHunger(int hunger) {
-        System.out.println(this.name + "가(이) 허기를 " + hunger + " 회복합니다.");
+        Logg.add(this.name + "가(이) 허기를 " + hunger + " 회복합니다.");
         this.hunger += hunger;
     }
 
     ;
 
     void fillSanity(int sanity) {
-        System.out.println(this.name + "가(이) 정신력을 " + sanity + " 회복합니다.");
+        Logg.add(this.name + "가(이) 정신력을 " + sanity + " 회복합니다.");
         this.sanity += sanity;
     }
 
@@ -58,17 +61,17 @@ public abstract class Characters {
         battleCount++;
         if (ch.health - damage <= 0) {
             ch.health = 0;
-            System.out.println(ch.name + "가(이) " + damage + "의 데미지를 받고 죽었습니다!");
+            Logg.add(ch.name + "가(이) " + damage + "의 데미지를 받고 죽었습니다!");
         } else {
             ch.health -= damage;
-            System.out.println(ch.name + "가(이) " + damage + "의 데미지를 받았습니다! 현재 체력: " + ch.health);
+            Logg.add(ch.name + "가(이) " + damage + "의 데미지를 받았습니다! 현재 체력: " + ch.health);
         }
     }
 
     ;
 
     void attackDamage(Characters ch, int damage) {
-        System.out.println(this.name + "가(이) 공격합니다.");
+        Logg.add(this.name + "가(이) 공격합니다.");
         getDamage(ch, damage);
     }
 
@@ -77,12 +80,27 @@ public abstract class Characters {
             if (resurrectable.canResurrect()) {
                 fillHealth(1);
                 this.dead = false;
-                System.out.println(this.name + "가(이) 부활했습니다!");
+                Logg.add(this.name + "가(이) 부활했습니다!");
                 resurrectable.afterResurrect();
             } else {
-                System.out.println(this.name + "부활 쿨타임");
+                Logg.add(this.name + " 부활 쿨타임");
             }
         }
     }
 
+    public static class Logg {
+        private static final List<String> log = new ArrayList<>();
+
+        private Logg() {}
+
+        public static void add(String msg) {
+            log.add(msg);
+        }
+        public static void printAll() {
+            for (String msg : log) {
+                System.out.println(msg);
+            }
+        }
+
+    }
 }
