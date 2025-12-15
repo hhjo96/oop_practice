@@ -26,4 +26,7 @@ public class Wigfrid extends Characters implements Melee{
         this.health += 60;
     }
 
+    void resurrectAfterEffects() {
+
+    }
 }

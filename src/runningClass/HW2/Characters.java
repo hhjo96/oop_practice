@@ -86,11 +86,14 @@ public abstract class Characters {
                 this.dead = false;
                 Logg.add(this.name + "가(이) 부활했습니다!");
                 resurrectable.afterResurrect();
+                resurrectAfterEffects();
             } else {
                 Logg.add(this.name + " 부활 쿨타임");
             }
         }
     }
+
+    abstract void resurrectAfterEffects();
 
     public void punchOrKite(Characters ch) {
         switch(this.type) {
