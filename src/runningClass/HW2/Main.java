@@ -1,9 +1,11 @@
 
 package runningClass.HW2;
 
-import java.util.Random;
 
-import static runningClass.HW2.GameConstants.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
 
@@ -14,76 +16,28 @@ public class Main {
         Resurrectable longRes = new CoolTimeResurrect(100);
 
 
-        Characters wilson
-                = new Wilson("윌슨", BASIC, BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY,  "normal", shortRes, CharacterType.MELEE);
-        Characters wigfrid
-                = new Wigfrid("위그", HUGE_BASIC, SMALL_BASIC, TINY_BASIC, STRONG_ATTACK, BASIC_INVENTORY, "meatatarian", longRes, CharacterType.MELEE);
-        Characters walter
-                = new Walter("월터", SMALL_BASIC, BIG_BASIC, HUGE_BASIC, BASIC_ATTACK, BASIC_INVENTORY, "normal", shortRes, CharacterType.RANGED);
-        Characters wurt
-                = new Wurt("워트", BASIC, HUGE_BASIC, BASIC, BASIC_ATTACK, BASIC_INVENTORY, "vegetarian", longRes, CharacterType.MELEE);
+        Characters wilson = new Wilson(shortRes);
+        Characters wigfrid = new Wigfrid(longRes);
+        Characters walter = new Walter(shortRes);
+        Characters wurt = new Wurt(longRes);
 
-        Random random = new Random();
+        Team<Characters> teamBlue = new Team<>("Blue");
+        Team<Characters> teamRed = new Team<>("Red");
+        int teamSize = 2;
 
-        //랜덤한 두명을 고르기
-        Characters[] characters = {wilson, wigfrid, walter, wurt};
-        int rand1 = random.nextInt(characters.length);
-        int rand2 = random.nextInt(characters.length);
+        //랜덤하게 팀 두개를 짜기
+        List<Characters> pool = new ArrayList<>(Arrays.asList(new Characters[]{wilson, wigfrid, walter, wurt}));
+        Collections.shuffle(pool);
+        teamBlue.addMembers(pool.subList(0, pool.size() / teamSize));
+        teamRed.addMembers(pool.subList(pool.size() / teamSize, pool.size()));
 
-        while(rand1 == rand2) { // 같은사람 뽑히면 다시 뽑기
-            rand2 = random.nextInt(characters.length);
-        }
+        Battle.battle(teamRed, teamBlue);
 
-        Characters.Logg.add("======일대일 시작!======");
 
-        while(characters[rand1].health > 0 && characters[rand2].health > 0) {
-            characters[rand1].attackDamage(characters[rand2], random.nextInt(30));
-            characters[rand2].attackDamage(characters[rand1], random.nextInt(30));
-
-            characters[rand1].ownSkill();
-            characters[rand2].ownSkill();
-
-            characters[rand1].fillHealth(random.nextInt(100));
-            characters[rand2].fillHealth(random.nextInt(100));
-
-//            if(characters[rand1] instanceof Melee) {
-//                ((Melee) characters[rand1]).punch(characters[rand2]);
-//            }
-//            if(characters[rand2] instanceof Melee) {
-//                ((Melee) characters[rand2]).punch(characters[rand1]);
-//            }
-//            if (characters[rand1] instanceof Ranged) {
-//                ((Ranged) characters[rand1]).kite(characters[rand2]);
-//            }
-//            if (characters[rand2] instanceof Ranged) {
-//                ((Ranged) characters[rand2]).kite(characters[rand1]);
-//            }
-            characters[rand1].punchOrKite(characters[rand2]);
-            characters[rand2].punchOrKite(characters[rand1]);
-
-            characters[rand1].ult(characters[rand2]);
-            characters[rand2].ult(characters[rand1]);
-
-            if(characters[rand1].health <= 0) {
-                characters[rand1].dead = true;
-                characters[rand1].resurrect();
-            }
-            if(characters[rand2].health <= 0) {
-                characters[rand2].dead = true;
-                characters[rand2].resurrect();
-            }
-        }
-
-        Characters.Logg.add("======일대일 종료!======");
-        if(characters[rand1].health > characters[rand2].health) {
-            Characters.Logg.add(characters[rand1].name + " 승!"+ characters[rand2].name + " 패!");
-        } else if(characters[rand1].health < characters[rand2].health) {
-            Characters.Logg.add(characters[rand2].name + " 승!"+ characters[rand1].name + " 패!");
-        } else {
-            Characters.Logg.add(characters[rand1].name+"와(과) "+ characters[rand2].name + "은(는) 비겼다!");
-        }
-
+        Characters.Logg.add("캐릭터 생성 횟수: "+ Characters.getCharacterCount() + " 전투 횟수: " + Characters.getBattleCount());
         Characters.Logg.printAll();
-        System.out.println("캐릭터 생성 횟수: "+ Characters.characterCount + " 전투 횟수: " + Characters.battleCount);
+
+        teamRed.printTeamMembers(pool.subList(0, pool.size() / teamSize));
+        teamBlue.printTeamMembers(pool.subList(pool.size() / teamSize, pool.size()));
     }
 }
