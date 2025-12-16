@@ -9,10 +9,14 @@
 부활 관련 Resurrectable.java, CoolTimeResurrect.java
 캐릭터 walter, wigfrid, wilson, walter
 게임 관련 상수 GameConstants.java
+랜덤하게 팀짜서 싸우기 Battle.java
+팀짜기 Team.java
 
 랜덤한 두 캐릭터가 싸우다가 한쪽이 죽으면 승패 출력
 
-기본~선택까지.(선택3 static 남용문제 제외)
+기본~선택까지.
+
+선택2번 답: T에 뭐가 들어갈 지 정해지지 않았으므로 최소한의 한도를 설정해줘야 한다.
 
 ```mermaid
 classDiagram
