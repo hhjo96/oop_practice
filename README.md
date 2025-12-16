@@ -51,65 +51,98 @@ classDiagram
     class CoolTimeResurrect{
         -nextResurrectTime: long
         -final cooltime: long
-        +Resurrectable(cooltime: long)
+        +CoolTimeResurrect(cooltime: long)
         +canResurrect(): boolean
         +afterResurrect(): void
     }
     class Characters {
-        ~name: String
-        ~health: int
-        ~hunger: int
-        ~sanity: int
-        ~damage: int
-        ~inventory: int
-        ~foodType: String
-        ~static battleCount: int
-        ~static characterCount: int
-        +Characters(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType, int battleCount)
+        -name: String
+        -health: int
+        -damage: int
+        -inventory: int
+        -foodType: String
+        -static battleCount: int
+        -static characterCount: int
+        +Characters(name: String, health: int, damage: int, inventory: int, foodType: String, resurrectable: Resurrectable, type: CharacterType)
         
+        +getName(): String
+        +getHealth(): int
+        +getDamage(): int
+        +getInventory(): int
+        +getDead(): boolean
+        +static getCharacterCount(): int
+        +static getBattleCount(): int
+        
+        +setHealth(health: int): void
+        +setDead(dead: boolean): void
+        +setInventory(inventory: int): void
+    
         ~abstract ult(ch: Characters): void
         ~abstract ownSkill() : void
         ~fillHealth(health: int) : void
         ~fillHunger(hunger: int) : void
         ~fillSanity(sanity: int) : void
         ~getDamage(ch: Characters, damage: int) : void
-        ~attachDamage(ch: Characters, damage: int) : void
-        ~final resurrect() void
+        ~attackDamage(ch: Characters, damage: int) : void
+        ~resurrect(): void <<final>>
         ~punchOrKite(ch: Characters) : void
         ~abstract resurrectAfterEffects(): void
+        ~continueBattle(): boolean
+    }
+    class CharacterType {
+        <<enumeration>>
+        MELEE
+        RANGED
     }
     class Logger {
-        <<static>>
-        ~add(msg: String): void
-        ~printAll(): void
+        ~static add(msg: String): void
+        ~static printAll(): void
     }
     class Walter {
-        +Walter(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        +Walter(resurrectable: Resurrectable)
         +ult(target: Characters): void
         +ownSkill(): void
         +kite(target: Characters): void
         +resurrectAfterEffects(): void
     }
     class Wilson {
-        ~Wilson(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        ~Wilson(resurrectable: Resurrectable)
         +ult(target: Characters): void
         +ownSkill(): void
         +punch(target: Characters): void
         +resurrectAfterEffects(): void
     }
     class Wigfrid  {
-        ~Wigfrid(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        ~Wigfrid(resurrectable: Resurrectable)
         +ult(target: Characters): void
         +ownSkill(): void
         +punch(target: Characters): void
         +resurrectAfterEffects(): void
     }
     class Wurt {
-        ~Wurt(String name, int health, int hunger, int sanity, int damage, int inventory, String foodType)
+        ~Wurt(resurrectable: Resurrectable)
         +ult(target: Characters): void
         +ownSkill(): void
         +punch(target: Characters): void
         +resurrectAfterEffects(): void
+    }
+    class Team~T extends Characters~{
+        -name: String
+        -members: ArrayList<T>
+        +Team(name: String)
+
+        ~getName(): String
+        
+        ~addMember(member: T)
+        ~getTotalHealth(): int
+        ~getMembers(): List<T>
+        ~getLeader(): T
+        ~printTeamMembers(members: List<T>): void
+        addMembers(members: List<T>): void
+        
+    }
+    class Battle{
+        +battle(teamRed: Team, teamBlue: Team): void <<final>>
     }
 
 Characters <|-- Walter
