@@ -5,7 +5,7 @@ import static runningClass.HW2.GameConstants.*;
 //월터: 전용 탈것이 있음, 맞은만큼 정신력도 깎임
 public class Walter extends Characters implements Ranged {
     public Walter(Resurrectable resurrectable) {
-        super("월터", SMALL_BASIC, BASIC_ATTACK, BASIC_INVENTORY, "normal", resurrectable, CharacterType.RANGED);
+        super("월터", SMALL_BASIC, BASIC_ATTACK, BASIC_INVENTORY, "normal", resurrectable, CharacterType.RANGED, new LevelUpPassive());
     }
 
 
@@ -29,6 +29,7 @@ public class Walter extends Characters implements Ranged {
     public void resurrectAfterEffects() {
         this.fillHealth(100);
     }
+
 
 
 }

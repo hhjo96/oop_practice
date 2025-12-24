@@ -6,7 +6,7 @@ public class Wilson extends Characters implements Melee {
 
     //윌슨: 스탯 기본, 인벤토리 추가 가능
     public Wilson( Resurrectable resurrectable) {
-        super("윌슨", BASIC, BASIC_ATTACK, BASIC_INVENTORY,  "normal", resurrectable, CharacterType.MELEE);
+        super("윌슨", BASIC, BASIC_ATTACK, BASIC_INVENTORY,  "normal", resurrectable, CharacterType.MELEE, new MorePunchPassive());
     }
 
 

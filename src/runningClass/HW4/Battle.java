@@ -29,6 +29,7 @@ public class Battle {
                 ownAbilityBattle();
                 meleeRangedBattle();
                 ultBattle();
+                passiveBattle();
             } catch (DeadChampionActionException e) {
                 Characters.Logg.add(e.getMessage());
                 break;
@@ -82,6 +83,18 @@ public class Battle {
             throw new DeadChampionActionException(blue.getName() + "은 사망했습니다!");
         }
         blue.useQ(red);
+        if (red.cannotContinueBattle()) {
+            throw new DeadChampionActionException(red.getName() + "은 사망했습니다!");
+        }
+        Characters.Logg.add("");
+    }
+    public void passiveBattle(){
+        Characters.Logg.add("5. 패시브 적용");
+        red.getPassive().applyPassive(red, blue);
+        if (blue.cannotContinueBattle()) {
+            throw new DeadChampionActionException(blue.getName() + "은 사망했습니다!");
+        }
+        blue.getPassive().applyPassive(blue, red);
         if (red.cannotContinueBattle()) {
             throw new DeadChampionActionException(red.getName() + "은 사망했습니다!");
         }

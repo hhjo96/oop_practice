@@ -5,7 +5,7 @@ import static runningClass.HW2.GameConstants.*;
 //워트: 스탯을 올릴 수 있음, 야채만 먹음
 public class Wurt extends Characters implements Melee {
     public Wurt(Resurrectable resurrectable) {
-        super("워트", BASIC, BASIC_ATTACK, BASIC_INVENTORY, "vegetarian", resurrectable, CharacterType.MELEE);
+        super("워트", BASIC, BASIC_ATTACK, BASIC_INVENTORY, "vegetarian", resurrectable, CharacterType.MELEE, new ExtraDamagePassive());
     }
 
 

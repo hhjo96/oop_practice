@@ -21,7 +21,9 @@ public abstract class Characters {
     private final Resurrectable resurrectable;
     private CharacterType type;
 
-    public Characters(String name, int health, int damage, int inventory, String foodType, Resurrectable resurrectable, CharacterType type) {
+    private Passive passive;
+
+    public Characters(String name, int health, int damage, int inventory, String foodType, Resurrectable resurrectable, CharacterType type, Passive passive) {
         this.name = name;
         this.health = health;
         this.damage = damage;
@@ -32,6 +34,7 @@ public abstract class Characters {
         this.isDead = false;
         this.resurrectable = resurrectable;
         this.type = type;
+        this.passive = passive;
     }
 
     public String getName() {
@@ -64,6 +67,9 @@ public abstract class Characters {
     public static int getBattleCount() {
         return battleCount;
     }
+    public Passive getPassive() {
+        return passive;
+    }
 
 public void setDamage(int damage) { this.damage = damage;}
     public int setHealth(int health) {
@@ -77,6 +83,12 @@ public void setDamage(int damage) { this.damage = damage;}
     }
     public void setLevel(int level) { this.level = level;
     }
+    public static void setBattleCount(int battleCount) {
+        Characters.battleCount = battleCount;
+    }
+    public void plusBattleCount(){
+        Characters.setBattleCount(getBattleCount() + 1);
+    }
 
     abstract void useQ(Characters ch);
 
@@ -88,7 +100,7 @@ public void setDamage(int damage) { this.damage = damage;}
     }
 
     void takeDamage(Characters ch, int damage) {
-        battleCount++;
+        plusBattleCount();
         if (ch.getHealth() - damage <= 0) {
             ch.setHealth(0);
             Logg.add(ch.getName() + "가(이) " + damage + "의 데미지를 받고 죽었습니다!");
