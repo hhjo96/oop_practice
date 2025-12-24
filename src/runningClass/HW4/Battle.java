@@ -1,5 +1,6 @@
 package runningClass.HW4;
 
+import java.util.List;
 import java.util.Random;
 
 public class Battle {
@@ -87,8 +88,17 @@ public class Battle {
         Characters.Logg.add("");
     }
 
+    public void summaryBattle(){
+        List<String> log = Characters.Logg.getLog().stream().filter(s->s.contains("승")).toList();
+        if(log.isEmpty()) { // 누가 이겼다는 로그가 없는 경우 비긴 것이므로 비겼다를 찾기
+            log = Characters.Logg.getLog().stream().filter(s->s.contains("비겼다")).toList();
+        } else { // 누가 이겼다는 로그가 있을 경우
+            System.out.println(log.get(0));
+        }
+    }
 
-    public void battleLog(){
+
+    public void finishBattleLog(){
         Characters.Logg.add("======일대일 종료!======");
         if (red.getHealth() > blue.getHealth()) {
             Characters.Logg.add(red.getName() + " 승!" + blue.getName() + " 패!");
