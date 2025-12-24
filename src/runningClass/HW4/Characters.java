@@ -153,6 +153,10 @@ public void setDamage(int damage) { this.damage = damage;}
 
         private Logg() {}
 
+        public static List<String> getLog() {
+            return log;
+        }
+
         static void add(String msg) {
             log.add(msg);
         }

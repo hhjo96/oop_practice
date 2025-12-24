@@ -24,26 +24,52 @@ public class Main {
         Team<Characters> teamRed = new Team<>("Red");
         int teamSize = 2;
 
-        //랜덤하게 팀 두개를 짜기
+        //pool 생성
         List<Characters> pool = new ArrayList<>(Arrays.asList(new Characters[]{wilson, wigfrid, walter, wurt}));
+        //랜덤 팀 생성
         Collections.shuffle(pool);
         teamBlue.addMembers(new ArrayList<>(pool.subList(0, pool.size() / teamSize)));
         teamRed.addMembers(new ArrayList<>(pool.subList(pool.size() / teamSize, pool.size())));
 
-        //1대1로 싸우기
+        //1대1로 싸우기: 배틀 클래스에서 팀당 1명을 뽑음
         Battle battle = new Battle(teamRed, teamBlue);
+        //안전 전투 진행
         battle.battle();
-        battle.battleLog();
+        //승패 및 전투 종료 메시지 출력
+        battle.finishBattleLog();
 
 
         Characters.Logg.add("캐릭터 생성 횟수: "+ Characters.getCharacterCount() + " 전투 횟수: " + Characters.getBattleCount());
-        Characters.Logg.printAll();
 
-        teamRed.printTeamMembers(pool.subList(0, pool.size() / teamSize));
-        teamBlue.printTeamMembers(pool.subList(pool.size() / teamSize, pool.size()));
+        //전체 전투 이력을 보거나 스트림을 활용하여 전투 로그 요약하기(승패만 출력)
+        System.out.print("전체 전투 이력을 볼 경우 1을 입력, 결과만 볼 경우 2를 입력하세요: ");
+        String answer = sc.nextLine();
 
-        searchCharacter(teamBlue, teamRed, sc);
-        searchLog(sc);
+        if(answer.trim().equals("1")) { Characters.Logg.printAll(); }
+        else if(answer.trim().equals("2")) { battle.summaryBattle(); }
+        else { System.out.println("잘못된 입력입니다.");}
+
+
+        //팀 구성 확인
+        System.out.print("팀 구성을 볼 경우 1을 입력, 다음으로 넘어갈 경우 2를 입력하세요: ");
+        answer = sc.nextLine();
+        if(answer.trim().equals("1")) {
+            teamRed.printTeamMembers(pool.subList(0, pool.size() / teamSize));
+            teamBlue.printTeamMembers(pool.subList(pool.size() / teamSize, pool.size()));
+        }
+
+        //캐릭터 이름으로 검색하기
+        System.out.print("캐릭터가 있는지 검색하려면 1을 입력, 다음으로 넘어갈 경우 2를 입력하세요: ");
+        answer = sc.nextLine();
+        if(answer.trim().equals("1")) { searchCharacter(teamBlue, teamRed, sc); }
+
+        //캐릭터 이름으로 로그 확인하기
+        System.out.print("캐릭터에 대한 로그를 검색하려면 1을 입력, 다음으로 넘어갈 경우 2를 입력하세요: ");
+        answer = sc.nextLine();
+        if(answer.trim().equals("1")) { searchLog(sc); }
+
+        System.out.println("프로그램을 종료합니다.");
+        sc.close();
 
     }
 
