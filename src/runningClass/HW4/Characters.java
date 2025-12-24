@@ -1,10 +1,7 @@
 package runningClass.HW4;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static runningClass.HW2.GameConstants.*;
 
@@ -20,7 +17,7 @@ public abstract class Characters {
     private static int characterCount = 0;
     private static int battleCount = 0;
 
-    private boolean dead = false;
+    private boolean isDead = false;
     private final Resurrectable resurrectable;
     private CharacterType type;
 
@@ -32,6 +29,7 @@ public abstract class Characters {
         this.foodType = foodType;
         this.defense = 0;
         characterCount++;
+        this.isDead = false;
         this.resurrectable = resurrectable;
         this.type = type;
     }
@@ -47,7 +45,7 @@ public abstract class Characters {
     }
 
     public boolean getDead() {
-        return this.dead;
+        return this.isDead;
     }
     public int getInventory() {
         return this.inventory;
@@ -71,8 +69,8 @@ public void setDamage(int damage) { this.damage = damage;}
     public int setHealth(int health) {
         return this.health = health;
     }
-    public void setDead(boolean dead) {
-        this.dead = dead;
+    public void setIsDead(boolean dead) {
+        this.isDead = dead;
     }
     public void setInventory(int inventory) {
         this.inventory = inventory;
@@ -111,10 +109,10 @@ public void setDamage(int damage) { this.damage = damage;}
     }
 
     final void resurrect() {
-        if (dead) {
+        if (isDead) {
             if (resurrectable.canResurrect()) {
                 fillHealth(1);
-                this.setDead(false);
+                this.setIsDead(false);
                 Logg.add(this.name + "가(이) 부활했습니다!");
                 resurrectable.afterResurrect();
                 resurrectAfterEffects();
@@ -133,19 +131,20 @@ public void setDamage(int damage) { this.damage = damage;}
         }
     }
 
-    boolean continueBattle() {
+    boolean cannotContinueBattle() {
         if (this.getHealth() > 0) {
-            return true;
+            return false;
         }
 
         // 체력 0 이하일 때 부활
-        if (resurrectable != null && resurrectable.canResurrect()) {
+        if (resurrectable.canResurrect()) {
+            this.setIsDead(true);
             resurrect();
-            return true;
+            return false;
         }
 
-        this.setDead(true);
-        return false;
+        this.setIsDead(true);
+        return true;
     }
 
 

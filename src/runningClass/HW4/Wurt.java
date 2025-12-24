@@ -20,7 +20,7 @@ public class Wurt extends Characters implements Melee {
     }
 
     public void ownSkill() {
-        Logg.add(this.getName() + "가 야채를 먹고 스탯을 향상시킵니다.");
+        Logg.add(this.getName() + "가 야채를 먹고 체력을 100 향상시킵니다.");
         this.setHealth(this.getHealth() + 100);
     }
     public void resurrectAfterEffects() {
