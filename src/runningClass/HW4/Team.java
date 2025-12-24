@@ -1,11 +1,11 @@
-package runningClass.HW3.HW2;
+package runningClass.HW4;
 
 import java.util.*;
 
 public class Team<T extends Characters> {
     private String name;
     private List<T> members = new ArrayList<T>();
-    private Map<String, T> teamMap = new HashMap<>();
+    //private Map<String, T> teamMap = new HashMap<>();
 
     public Team(String name) {
         this.name = name;
@@ -40,12 +40,12 @@ public class Team<T extends Characters> {
         System.out.println();
     }
 
-    void addMembers(List<? extends T> members) {
+    void addMembers(Collection<? extends T> members) {
         this.members.addAll(members);
     }
 
     public Optional<Characters> find(String name) {
-        return Optional.ofNullable(teamMap.get(name));
+        return Optional.ofNullable(members.stream().filter(ch -> ch.getName().equals(name)).findFirst().orElse(null));
     }
 
 }

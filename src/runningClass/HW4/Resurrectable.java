@@ -1,4 +1,4 @@
-package runningClass.HW3.HW2;
+package runningClass.HW4;
 
 public interface Resurrectable {
     //부활 가능한지?

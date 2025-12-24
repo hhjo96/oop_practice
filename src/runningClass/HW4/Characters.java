@@ -1,7 +1,10 @@
-package runningClass.HW3.HW2;
+package runningClass.HW4;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static runningClass.HW2.GameConstants.*;
 
@@ -142,8 +145,9 @@ public void setDamage(int damage) { this.damage = damage;}
         }
 
         this.setDead(true);
-        throw new DeadChampionActionException(this.getName() + "은 사망했습니다!");
+        return false;
     }
+
 
     static class Logg {
         private static final List<String> log = new ArrayList<>();
@@ -156,6 +160,15 @@ public void setDamage(int damage) { this.damage = damage;}
         static void printAll() {
             for (String msg : log) {
                 System.out.println(msg);
+            }
+        }
+        static void nameFromLog(String name) {
+
+            List<String> log = Logg.log.stream().filter(s->s.contains(name)).toList();
+            if(log.isEmpty()) {
+                System.out.println("해당 캐릭터의 로그가 없습니다.");
+            } else {
+                log.forEach(System.out::println);
             }
         }
 
