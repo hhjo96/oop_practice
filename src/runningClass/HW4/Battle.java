@@ -1,40 +1,61 @@
-package runningClass.HW3.HW2;
+package runningClass.HW4;
 
 import java.util.Random;
 
 public class Battle {
 
-    public static void battle(Team teamRed, Team teamBlue) {
+    private Team teamRed;
+    private Team teamBlue;
+    private Characters red;
+    private Characters blue;
+
+    public Battle(Team teamRed, Team teamBlue) {
+        this.teamRed = teamRed;
+        this.teamBlue = teamBlue;
+        red = teamRed.getLeader();
+        blue = teamBlue.getLeader();
+    }
+    // 사망 관련 함수
+    public void canContinueBattle(Characters leader){
+        if(!leader.continueBattle()) {
+            throw new DeadChampionActionException(leader.getName() + "은 사망했습니다!");
+        }
+    }
+
+    public void battle() {
 
         Random random = new Random();
 
         Characters.Logg.add("======일대일 시작!======");
 
-        Characters red = teamRed.getLeader();
-        Characters blue = teamBlue.getLeader();
-
         while (red.getHealth() > 0 && blue.getHealth() > 0) {
+            Characters.Logg.add("1. 기본 공격 주고받기");
             red.basicAttack(blue, random.nextInt(30));
-            if(!blue.continueBattle()) { break; }
+            canContinueBattle(blue);
             blue.basicAttack(red, random.nextInt(30));
-            if(!red.continueBattle()) { break; }
+            canContinueBattle(red);
 
+            Characters.Logg.add("2. 고유 능력 주고받기");
             red.ownSkill();
-            if(!blue.continueBattle()) { break; }
+            canContinueBattle(blue);
             blue.ownSkill();
-            if(!red.continueBattle()) { break; }
+            canContinueBattle(red);
 
+            Characters.Logg.add("3. 근딜/원딜 능력 주고받기");
             red.punchOrKite(blue);
-            if(!blue.continueBattle()) { break; }
+            canContinueBattle(blue);
             blue.punchOrKite(red);
-            if(!red.continueBattle()) { break; }
+            canContinueBattle(red);
 
+            Characters.Logg.add("4. 궁쓰기");
             red.useQ(blue);
-            if(!blue.continueBattle()) { break; }
+            canContinueBattle(blue);
             blue.useQ(red);
-            if(!red.continueBattle()) { break; }
+            canContinueBattle(red);
         }
+    }
 
+    public void battleLog(){
         Characters.Logg.add("======일대일 종료!======");
         if (red.getHealth() > blue.getHealth()) {
             Characters.Logg.add(red.getName() + " 승!" + blue.getName() + " 패!");

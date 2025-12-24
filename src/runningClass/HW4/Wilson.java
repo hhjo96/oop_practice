@@ -1,4 +1,4 @@
-package runningClass.HW3.HW2;
+package runningClass.HW4;
 
 import static runningClass.HW2.GameConstants.*;
 
