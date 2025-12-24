@@ -3,10 +3,10 @@ package runningClass.HW4;
 import static runningClass.HW2.GameConstants.*;
 
 //위그: 공격력 2배, 고기만 먹음
-public class Wigfrid extends Characters implements Melee {
+public class Wigfrid extends Characters implements Melee{
 
     public Wigfrid(Resurrectable resurrectable) {
-        super("위그", HUGE_BASIC, STRONG_ATTACK, BASIC_INVENTORY, "meatatarian", resurrectable, CharacterType.MELEE);
+        super("위그", HUGE_BASIC, STRONG_ATTACK, BASIC_INVENTORY, "meatatarian", resurrectable, CharacterType.MELEE, new MoreHealthPassive());
     }
 
 
