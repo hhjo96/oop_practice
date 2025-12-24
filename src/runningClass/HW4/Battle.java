@@ -8,52 +8,85 @@ public class Battle {
     private Team teamBlue;
     private Characters red;
     private Characters blue;
+    private Random random;
 
     public Battle(Team teamRed, Team teamBlue) {
         this.teamRed = teamRed;
         this.teamBlue = teamBlue;
         red = teamRed.getLeader();
         blue = teamBlue.getLeader();
-    }
-    // 사망 관련 함수
-    public void canContinueBattle(Characters leader){
-        if(!leader.continueBattle()) {
-            throw new DeadChampionActionException(leader.getName() + "은 사망했습니다!");
-        }
+        random = new Random();
     }
 
     public void battle() {
 
-        Random random = new Random();
-
         Characters.Logg.add("======일대일 시작!======");
 
         while (red.getHealth() > 0 && blue.getHealth() > 0) {
-            Characters.Logg.add("1. 기본 공격 주고받기");
-            red.basicAttack(blue, random.nextInt(30));
-            canContinueBattle(blue);
-            blue.basicAttack(red, random.nextInt(30));
-            canContinueBattle(red);
-
-            Characters.Logg.add("2. 고유 능력 주고받기");
-            red.ownSkill();
-            canContinueBattle(blue);
-            blue.ownSkill();
-            canContinueBattle(red);
-
-            Characters.Logg.add("3. 근딜/원딜 능력 주고받기");
-            red.punchOrKite(blue);
-            canContinueBattle(blue);
-            blue.punchOrKite(red);
-            canContinueBattle(red);
-
-            Characters.Logg.add("4. 궁쓰기");
-            red.useQ(blue);
-            canContinueBattle(blue);
-            blue.useQ(red);
-            canContinueBattle(red);
+            try {
+                basicBattle();
+                ownAbilityBattle();
+                meleeRangedBattle();
+                ultBattle();
+            } catch (DeadChampionActionException e) {
+                Characters.Logg.add(e.getMessage());
+                break;
+            }
         }
     }
+
+    public void basicBattle() {
+        Characters.Logg.add("1. 기본 공격 주고받기");
+        red.basicAttack(blue, random.nextInt(30));
+        if (blue.cannotContinueBattle()) {
+            throw new DeadChampionActionException(blue.getName() + "은 사망했습니다!");
+        }
+        blue.basicAttack(red, random.nextInt(30));
+        if (red.cannotContinueBattle()) {
+            throw new DeadChampionActionException(red.getName() + "은 사망했습니다!");
+        }
+        Characters.Logg.add("");
+    }
+
+    public void ownAbilityBattle() {
+        Characters.Logg.add("2. 고유 능력 주고받기");
+        red.ownSkill();
+        if (blue.cannotContinueBattle()) {
+            throw new DeadChampionActionException(blue.getName() + "은 사망했습니다!");
+        }
+        blue.ownSkill();
+        if (red.cannotContinueBattle()) {
+            throw new DeadChampionActionException(red.getName() + "은 사망했습니다!");
+        }
+        Characters.Logg.add("");
+    }
+
+    public void meleeRangedBattle() {
+        Characters.Logg.add("3. 근딜/원딜 능력 주고받기");
+        red.punchOrKite(blue);
+        if (blue.cannotContinueBattle()) {
+            throw new DeadChampionActionException(blue.getName() + "은 사망했습니다!");
+        }
+        blue.punchOrKite(red);
+        if (red.cannotContinueBattle()) {
+            throw new DeadChampionActionException(red.getName() + "은 사망했습니다!");
+        }
+        Characters.Logg.add("");
+    }
+
+    public void ultBattle() {
+        Characters.Logg.add("4. 궁쓰기");
+        red.useQ(blue);
+        if (blue.cannotContinueBattle()) {
+            throw new DeadChampionActionException(blue.getName() + "은 사망했습니다!");
+        }
+        blue.useQ(red);
+        if (red.cannotContinueBattle()) {
+            throw new DeadChampionActionException(red.getName() + "은 사망했습니다!");
+        }
+        Characters.Logg.add("");
+    }
+
 
     public void battleLog(){
         Characters.Logg.add("======일대일 종료!======");

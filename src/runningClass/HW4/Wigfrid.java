@@ -12,7 +12,7 @@ public class Wigfrid extends Characters implements Melee {
 
     public void useQ(Characters target) {
         Logg.add(this.getName() + "의 궁");
-        takeDamage(target, STRONG_ULT_ATTACK * 2);
+        takeDamage(target, STRONG_ULT_ATTACK);
     }
 
     public void punch(Characters target) {
